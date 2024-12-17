@@ -12,6 +12,7 @@ Asignatura: Sistemas Operativos
 
 #define LONGITUD_COMANDO 100
 
+//Funciones
 void Printbytemaps(EXT_BYTE_MAPS *ext_bytemaps);
 int ComprobarComando(char *strcomando, char *orden, char *argumento1, char *argumento2);
 void LeeSuperBloque(EXT_SIMPLE_SUPERBLOCK *psup);
