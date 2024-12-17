@@ -93,7 +93,7 @@ void Printbytemaps(EXT_BYTE_MAPS *ext_bytemaps) {
 
 //Función para comprobar que el comando sea correcto
 int ComprobarComando(char *strcomando, char *orden, char *argumento1, char *argumento2) {
-  
+         
 }
 
 //Función para leer el superbloque
