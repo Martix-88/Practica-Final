@@ -91,7 +91,7 @@ void Printbytemaps(EXT_BYTE_MAPS *ext_bytemaps) {
   
 }
 
-//Fucnión para comprobar que el comando sea correcto
+//Función para comprobar que el comando sea correcto
 int ComprobarComando(char *strcomando, char *orden, char *argumento1, char *argumento2) {
   
 }
@@ -149,17 +149,17 @@ int Copiar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_BYTE_MAPS *e
   
 }
 
-//FUnción para grabar los i-nodos y el directorio del fichero seleccionado
+//Función para grabar los i-nodos y el directorio del fichero seleccionado
 void Grabarinodosydirectorio(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, FILE *fich) {
   
 }
 
-//FUnción para guardar el bytemap
+//Función para guardar el bytemap
 void GrabarByteMaps(EXT_BYTE_MAPS *ext_bytemaps, FILE *fich) {
   
 }
 
-//FUnción para guardar el superbloque
+//Función para guardar el superbloque
 void GrabarSuperBloque(EXT_SIMPLE_SUPERBLOCK *ext_superblock, FILE *fich) {
   
 }
