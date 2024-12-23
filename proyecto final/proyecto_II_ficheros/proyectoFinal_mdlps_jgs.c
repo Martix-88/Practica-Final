@@ -88,7 +88,15 @@ int main(){
 
 //Función para imprimir el bytemap por pantalla
 void Printbytemaps(EXT_BYTE_MAPS *ext_bytemaps) {
-  
+         printf("Bytemap de bloques: \n");
+         for (int i = 0; i < MAX_BLOQUES_PARTICION; i++) {
+                  printf("%d ", ext_bytemaps -> bmap_bloques[i]);
+         }
+         printf("\nBytemap de inodos:\n");
+         for (int i = 0; i < MAX_INODOS; i++) {
+                  printf("%d ", ext_bytemaps -> bmap_inodos[i]);
+         }
+         printf("\n");
 }
 
 //Función para comprobar que el comando sea correcto
