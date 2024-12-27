@@ -89,7 +89,7 @@ int main(){
 //Función para imprimir el bytemap por pantalla
 void Printbytemaps(EXT_BYTE_MAPS *ext_bytemaps) {
          printf("Bytemap de bloques: \n");
-         for (int i = 0; i < MAX_BLOQUES_PARTICION; i++) {
+         for (int i = 0; i < MAX_BLOQUES_PARTICION; i++) { //Mostrar los primeros 25 elementos del bytemap de bloques
                   printf("%d ", ext_bytemaps -> bmap_bloques[i]);
          }
          printf("\nBytemap de inodos:\n");
@@ -101,17 +101,37 @@ void Printbytemaps(EXT_BYTE_MAPS *ext_bytemaps) {
 
 //Función para comprobar que el comando sea correcto
 int ComprobarComando(char *strcomando, char *orden, char *argumento1, char *argumento2) {
-         
+         int num = sscanf(strcomando, "%s %s %s", orden, argumento1, argumento2);
+         //Si solo es "salir" retorna 0 indicando que es correcto el comando
+         if (num == 1 && strcmp(orden, "salir") == 0) {
+                  return 0;
+         }
+         //Si se ha leído al menos un argumento, y no hay errores entonces retorna 0
+         if (num >= 1) {
+                  return 0;
+         }
+         //Si no se ha podido leer correctamente, retorna -1
+         return -1;
 }
 
 //Función para leer el superbloque
 void LeeSuperBloque(EXT_SIMPLE_SUPERBLOCK *psup) {
-  
+         //Verifico si el puntero es NULL
+         if (psup == NULL) {
+                  printf("ERROR. El superbloque es NULL\n");
+                  return;
+         }
+         //Muestro la información del superbloque
+         printf("Bloque %d bytes\n", psup -> s_block_size);
+         printf("Inodos particion = %d\n",psup -> s_inodes_count);
+         printf("Inodos libres = %d\n",psup -> s_free_inodes_count);
+         printf("Bloques particion = %d\n",psup -> s_blocks_count);
+         printf("Bloques libres = %d\n",psup -> s_free_blocks_count);
 }
 
 //Función para buscar el fichero
 int BuscaFich(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, char *nombre) {
-  
+         
 }
 
 //Función para listar todos los ficheros
