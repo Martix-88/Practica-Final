@@ -131,17 +131,49 @@ void LeeSuperBloque(EXT_SIMPLE_SUPERBLOCK *psup) {
 
 //Función para buscar el fichero
 int BuscaFich(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, char *nombre) {
-         
+         //Verifico si el puntero al directorio es NULL
+         if (directorio == NULL) {
+                  return -1; //Si el puntero al directorio es NULL, devuelve -1
+         }
+         //Recorro todas las entradas del directorio
+         for (int i = 0; i < MAX_FICHEROS; i++) {
+                  //Compruebo si el nombre de la entrada actual es igual al nombre buscado
+                  int j = 0;
+                  while (directorio[i].dir_nfich[j] != '\0' && nombre[j] != '\0') {
+                           if (directorio[i].dir_nfich[j] != nombre[j]) {
+                                    break; //Si los caracteres no coinciden se sale del bucle
+                           }
+                           j++; //Se pasa al siguiente caracter
+                  }
+                  //Si ambos nombres son iguales (y la longitud es la misma), se devuelve el índice
+                  if (directorio[i].dir_nfich[j] == '\0' && nombre[j] == '\0') {
+                           return i;
+                  }
+         }
+         //Si no se ha encontrado el archivo devuelve -1
+         return -1;
 }
 
 //Función para listar todos los ficheros
 void Directorio(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos) {
-  
+         printf("NOMBRE\t\tTAMANIO\t\tINODO\t\tBLOQUES\n");
+         for (int i = 1; i < MAX_FICHEROS; i++) {
+                  if (directorio[i].dir_inodo != NULL_INODO) {
+                           EXT_SIMPLE_INODE *inodo = &inodos -> blq_inodos[directorio[i].dir_inodo];
+                           printf("%s\t\t%d\t\t%d\t\t", directorio[i].dir_nfich, inodo -> six¡ze_fichero, directorio[i].dir_inodo);
+                           for (int j = 0; j < MAX_NUMS_BLOQUE_INODO; j++) {
+                                    if (inodo -> i_nbloque[j] != NULL_BLOQUE) {
+                                             printf("%d ", inodo -> i_nbloque[j]);
+                                    }
+                           }
+                           printf("\n");
+                  }
+         }
 }
 
 //Función para renombrar los ficheros
 int Renombrar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, char *nombreantiguo, char *nombrenuevo) {
-  
+         
 }
 
 //Función para mostrar el contenido del fichero especidicado como un texto
