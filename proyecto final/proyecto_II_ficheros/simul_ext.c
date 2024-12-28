@@ -19,7 +19,7 @@ void LeeSuperBloque(EXT_SIMPLE_SUPERBLOCK *psup);
 int BuscaFich(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, char *nombre);
 void Directorio(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos);
 int Renombrar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, char *nombreantiguo, char *nombrenuevo);
-int Imprimir(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_DATOS *memdatos, char *nombre)
+int Imprimir(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_DATOS *memdatos, char *nombre);
 int Borrar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_BYTE_MAPS *ext_bytemaps, EXT_SIMPLE_SUPERBLOCK *ext_superblock, char *nombre,  FILE *fich);
 int Copiar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_BYTE_MAPS *ext_bytemaps, EXT_SIMPLE_SUPERBLOCK *ext_superblock, EXT_DATOS *memdatos, char *nombreorigen, char *nombredestino,  FILE *fich);
 void Grabarinodosydirectorio(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, FILE *fich);
@@ -27,7 +27,7 @@ void GrabarByteMaps(EXT_BYTE_MAPS *ext_bytemaps, FILE *fich);
 void GrabarSuperBloque(EXT_SIMPLE_SUPERBLOCK *ext_superblock, FILE *fich);
 void GrabarDatos(EXT_DATOS *memdatos, FILE *fich);
 
-int main(){
+int main () {
          char *comando[LONGITUD_COMANDO];
          char *orden[LONGITUD_COMANDO];
          char *argumento1[LONGITUD_COMANDO];
@@ -41,14 +41,21 @@ int main(){
      EXT_ENTRADA_DIR directorio[MAX_FICHEROS];
      EXT_DATOS memdatos[MAX_BLOQUES_DATOS];
      EXT_DATOS datosfich[MAX_BLOQUES_PARTICION];
+         
      int entradadir;
      int grabardatos;
+         
      FILE *fent;
 
      // Lectura del fichero completo de una sola vez
-...
+//...
 
      fent = fopen("particion.bin","r+b");
+     if (fent == NULL) {
+         printf("Error al abrir el archivo 'particion.bin'\n");
+         return -1; //Indica que ha habido un error
+     }
+     
      fread(&datosfich, SIZE_BLOQUE, MAX_BLOQUES_PARTICION, fent);    
 
 
@@ -111,6 +118,7 @@ int main(){
             return 0;
          }
      }
+}
 
 //Función para imprimir el bytemap por pantalla
 void Printbytemaps(EXT_BYTE_MAPS *ext_bytemaps) {
@@ -246,7 +254,7 @@ int Imprimir (EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_DATOS *me
                     //Verifico si el bloque es válido
                     if (blnumber != NULL_BLOQUE) {
                              //Cargo el contenido del bloque en el array
-                             datosfichero[j] = memdatos[blnumber - PRIM_BLOQUE_DATOS];
+                             datosFichero[j] = memdatos[blnumber - PRIM_BLOQUE_DATOS];
                              printf("%s\n", datosfichero[j].dato);
                     }
                     j++;
