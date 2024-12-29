@@ -154,6 +154,7 @@ int ComprobarComando(char *strcomando, char *orden, char *argumento1, char *argu
                   return 0;
          }
          //Si no se ha podido leer correctamente, retorna -1
+         printf("ERROR: El comando introducido no es correcto\n");
          return -1;
 }
 
