@@ -102,13 +102,13 @@ int main () {
                        Copiar(directorio, &ext_blq_inodos, &ext_bytemaps, &ext_superblock, memdatos, argumento1, argumento2, fent); 
                        continue;
               }
-         ...
+         //...
          // Escritura de metadatos en comandos rename, remove, copy     
          Grabarinodosydirectorio(&directorio,&ext_blq_inodos,fent);
          GrabarByteMaps(&ext_bytemaps,fent);
          GrabarSuperBloque(&ext_superblock,fent);
          if (grabardatos)
-           GrabarDatos(&memdatos,fent);
+           GrabarDatos(&memdatos, fent);
          grabardatos = 0;
               
          //Si el comando es salir se habrán escrito todos los metadatos
@@ -255,14 +255,12 @@ int Imprimir (EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, EXT_DATOS *me
                     if (blnumber != NULL_BLOQUE) {
                              //Cargo el contenido del bloque en el array
                              datosFichero[j] = memdatos[blnumber - PRIM_BLOQUE_DATOS];
-                             printf("%s\n", datosfichero[j].dato);
+                             printf("%s\n", datosFichero[j].dato);
                     }
                     j++;
            } while (blnumber != NULL_BLOQUE);
         }
-
         return 0;
-    }
 }
 
 //Función para borrar el fichero seleccionado
