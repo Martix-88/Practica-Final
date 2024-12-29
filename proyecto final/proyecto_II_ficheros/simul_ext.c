@@ -71,7 +71,7 @@ int main () {
                  printf (">> ");
                  fflush(stdin);
                  fgets(comando, LONGITUD_COMANDO, stdin);
-                 } while (ComprobarComando(comando,orden,argumento1,argumento2) !=0);
+                 } while (ComprobarComando(comando, orden, argumento1, argumento2) !=0);
               //Si el comando es info
               if (strcmp(orden, "info") == 0) {
                        LeeSuperBloque(&ext_superblock);
@@ -102,6 +102,10 @@ int main () {
                        Copiar(directorio, &ext_blq_inodos, &ext_bytemaps, &ext_superblock, memdatos, argumento1, argumento2, fent); 
                        continue;
               }
+              //Si el comando es Imprimir
+              if (strcmp(orden, "print") == 0) {
+                       Imprimir(directorio, &ext_blq_inodos, memdatos, argumento1);
+              }
          //...
          // Escritura de metadatos en comandos rename, remove, copy     
          Grabarinodosydirectorio(&directorio,&ext_blq_inodos,fent);
@@ -112,7 +116,7 @@ int main () {
          grabardatos = 0;
               
          //Si el comando es salir se habrán escrito todos los metadatos
-         if (strcmp(orden,"salir")==0){
+         if (strcmp(orden,"exit")==0){
             GrabarDatos(&memdatos,fent);
             fclose(fent);
             return 0;
